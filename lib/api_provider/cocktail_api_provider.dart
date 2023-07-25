@@ -1,0 +1,31 @@
+import 'dart:convert';
+import 'package:cocktail_project/model/alcoholic_model.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+
+import '../jsonsa/popular_drinks_json.dart';
+import '../model/cocktail_model.dart';
+
+class CocktailApiProvider {
+  Client client = Client();
+  final String basicUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
+  final String alcoUrl = 'filter.php?a=Alcoholic';
+  final String nonAlcoUrl = 'filter.php?a=Non_Alcoholic';
+  final String randomCocktail = 'random.php';
+  Future<List<Drinks>> fetchDrinks(bool isAlco) async {
+    final response = isAlco
+        ? await client.get(Uri.parse(basicUrl + alcoUrl))
+        : await client.get(Uri.parse(basicUrl + nonAlcoUrl));
+    return AlcoholicModel.fromJson(json.decode(response.body)).drinks!;
+  }
+
+  Future<DrinkInfo> fetchRandomCocktail() async {
+    final response = await client.get(Uri.parse(basicUrl + randomCocktail));
+    return RandomCocktail.fromJson(json.decode(response.body)).drinks![0];
+  }
+
+  Future<List<Drinks>> fetchPopularDrinks() async {
+    return AlcoholicModel.fromJson(json.decode(jsonPopularDrinks)).drinks!;
+  }
+}

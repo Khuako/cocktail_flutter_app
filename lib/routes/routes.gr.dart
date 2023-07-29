@@ -45,6 +45,13 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SearchScreen(),
       );
     },
+    CocktailDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<CocktailDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CocktailDetailScreen(cocktailId: args.cocktailId),
+      );
+    },
   };
 }
 
@@ -116,4 +123,33 @@ class SearchRoute extends PageRouteInfo<void> {
   static const String name = 'SearchRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CocktailDetailScreen]
+class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
+  CocktailDetailRoute({
+    required String cocktailId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CocktailDetailRoute.name,
+          args: CocktailDetailRouteArgs(cocktailId: cocktailId),
+          initialChildren: children,
+        );
+
+  static const String name = 'CocktailDetailRoute';
+
+  static const PageInfo<CocktailDetailRouteArgs> page =
+      PageInfo<CocktailDetailRouteArgs>(name);
+}
+
+class CocktailDetailRouteArgs {
+  const CocktailDetailRouteArgs({required this.cocktailId});
+
+  final String cocktailId;
+
+  @override
+  String toString() {
+    return 'CocktailDetailRouteArgs{cocktailId: $cocktailId}';
+  }
 }

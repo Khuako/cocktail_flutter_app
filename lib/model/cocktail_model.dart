@@ -1,9 +1,9 @@
-class RandomCocktail {
+class Cocktail {
   List<DrinkInfo>? drinks;
 
-  RandomCocktail({this.drinks});
+  Cocktail({this.drinks});
 
-  RandomCocktail.fromJson(Map<String, dynamic> json) {
+  Cocktail.fromJson(Map<String, dynamic> json) {
     if (json['drinks'] != null) {
       drinks = <DrinkInfo>[];
       json['drinks'].forEach((v) {

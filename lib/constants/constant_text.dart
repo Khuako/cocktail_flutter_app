@@ -2,11 +2,23 @@ import 'package:cocktail_project/constants/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:google_fonts/google_fonts.dart';
+
 class ConstantText {
-  static const TextStyle titleTextStyle = TextStyle(
+  static TextStyle titleTextStyle = GoogleFonts.openSans(
       fontSize: 18,
       color: Colors.white,
       fontWeight: FontWeight.w900,
+      decoration: TextDecoration.none);
+  static TextStyle tagText = GoogleFonts.openSans(
+      fontSize: 16,
+      color: Colors.white70,
+      fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none);
+  static TextStyle ingText = GoogleFonts.openSans(
+      fontSize: 16,
+      color: Colors.white70,
+      fontWeight: FontWeight.w600,
       decoration: TextDecoration.none);
   static TextStyle bigGradientText = TextStyle(
     fontSize: 20,
@@ -16,7 +28,7 @@ class ConstantText {
         colors: <Color>[Colors.blue, Colors.purple],
       ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
   );
-  static TextStyle smallGradientText = TextStyle(
+  static TextStyle smallGradientText = GoogleFonts.openSans(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     foreground: Paint()
@@ -29,9 +41,9 @@ class ConstantText {
         ],
       ).createShader(Rect.fromLTWH(10.0, 40.0, 200.0, 70.0)),
   );
-  static TextStyle bigWhiteText =
-      TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white);
-  static TextStyle smallRandomGradientText = TextStyle(
+  static TextStyle bigWhiteText = GoogleFonts.openSans(
+      fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white);
+  static TextStyle smallRandomGradientText = GoogleFonts.openSans(
     fontSize: 18,
     fontWeight: FontWeight.w600,
     foreground: Paint()

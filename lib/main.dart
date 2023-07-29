@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/constants/constant_colors.dart';
 import 'package:cocktail_project/cubit/alco_list_cubit.dart';
+import 'package:cocktail_project/cubit/cocktail_detail_cubit.dart';
 import 'package:cocktail_project/cubit/non_alco_list_cubit.dart';
 import 'package:cocktail_project/cubit/popular_drinks_cubit.dart';
 import 'package:cocktail_project/cubit/random_cocktail_cubit.dart';
@@ -38,6 +39,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => PopularDrinksCubit()..fetchPopularDrinks(),
+        ),
+        BlocProvider(
+          create: (context) => CocktailDetailCubit(),
         ),
       ],
       child: MaterialApp.router(

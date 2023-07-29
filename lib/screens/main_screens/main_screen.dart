@@ -1,10 +1,10 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/constants/constant_colors.dart';
-import 'package:cocktail_project/screens/favorite_screen.dart';
-import 'package:cocktail_project/screens/home_screen.dart';
-import 'package:cocktail_project/screens/profile_screen.dart';
-import 'package:cocktail_project/screens/search_screen.dart';
+import 'package:cocktail_project/screens/main_screens/favorite_screen.dart';
+import 'package:cocktail_project/screens/main_screens/home_screen.dart';
+import 'package:cocktail_project/screens/main_screens/profile_screen.dart';
+import 'package:cocktail_project/screens/main_screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -36,22 +36,15 @@ class _MainScreenState extends State<MainScreen> {
     'Favorites',
     'Profile',
   ];
+  List<Color> colors = const [
+    ConstantColors.blueColor,
+    Colors.yellow,
+    Colors.red,
+    Colors.white,
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            names[_bottomNavIndex],
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-            ),
-          ),
-          backgroundColor: ConstantColors.lightBlack,
-          elevation: 0,
-          centerTitle: true,
-        ),
         body: IndexedStack(
           index: _bottomNavIndex,
           children: pages,
@@ -59,10 +52,10 @@ class _MainScreenState extends State<MainScreen> {
         bottomNavigationBar: AnimatedBottomNavigationBar(
           gapLocation: GapLocation.center,
           backgroundColor: ConstantColors.lightBlack,
-          activeColor: ConstantColors.blueColor,
+          activeColor: colors[_bottomNavIndex],
           inactiveColor: Colors.grey,
           icons: icons,
-          splashColor: ConstantColors.blueColor,
+          splashColor: colors[_bottomNavIndex],
           activeIndex: _bottomNavIndex,
           onTap: (p0) {
             _bottomNavIndex = p0;

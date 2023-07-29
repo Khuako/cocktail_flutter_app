@@ -5,10 +5,12 @@ import 'package:cocktail_project/cubit/alco_list_cubit.dart';
 import 'package:cocktail_project/cubit/non_alco_list_cubit.dart';
 import 'package:cocktail_project/cubit/popular_drinks_cubit.dart';
 import 'package:cocktail_project/cubit/random_cocktail_cubit.dart';
+import 'package:cocktail_project/routes/routes.dart';
 import 'package:cocktail_project/widgets/list_widget.dart';
 import 'package:cocktail_project/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -25,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        physics: AlwaysScrollableScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 2,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: GestureDetector(
                         onTap: () {
                           _alcIndex = index;
@@ -46,9 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         child: Text(
                           categories[index],
-                          style: TextStyle(
+                          style: GoogleFonts.openSans(
                             fontSize: 18,
-                            fontFamily: 'Ms',
                             fontWeight: FontWeight.bold,
                             color: _alcIndex == index
                                 ? ConstantColors.blueColor
@@ -68,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Container(
+              SizedBox(
                 height: 200,
                 width: double.infinity,
                 child: ListView.builder(
@@ -82,11 +83,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? BlocBuilder<AlcoListCubit, AlcoListState>(
                               builder: (context, state) {
                                 if (state is AlcoListLoaded) {
-                                  return ListWidget(
-                                      cockName:
-                                          state.alcoDrinks[index].strDrink!,
-                                      cockImage: state
-                                          .alcoDrinks[index].strDrinkThumb!);
+                                  return GestureDetector(
+                                    onTap: () {
+                                      AutoRouter.of(context).push(
+                                          CocktailDetailRoute(
+                                              cocktailId: state
+                                                  .alcoDrinks[index].idDrink!));
+                                    },
+                                    child: ListWidget(
+                                        cockName:
+                                            state.alcoDrinks[index].strDrink!,
+                                        cockImage: state
+                                            .alcoDrinks[index].strDrinkThumb!),
+                                  );
                                 } else if (state is AlcoListFailure) {
                                   showSnackBar(
                                       context, Colors.red, state.e.toString());
@@ -107,11 +116,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 }
                                 if (state is NonAlcoListLoaded) {
-                                  return ListWidget(
-                                      cockName:
-                                          state.alcoDrinks[index].strDrink!,
-                                      cockImage: state
-                                          .alcoDrinks[index].strDrinkThumb!);
+                                  return GestureDetector(
+                                    onTap: () {
+                                      AutoRouter.of(context).push(
+                                          CocktailDetailRoute(
+                                              cocktailId: state
+                                                  .alcoDrinks[index].idDrink!));
+                                    },
+                                    child: ListWidget(
+                                        cockName:
+                                            state.alcoDrinks[index].strDrink!,
+                                        cockImage: state
+                                            .alcoDrinks[index].strDrinkThumb!),
+                                  );
                                 }
                                 if (state is NonAlcoListFailure) {
                                   showSnackBar(
@@ -144,25 +161,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
                   if (state is RandomCocktailLoaded) {
-                    return Column(
-                      children: [
-                        Container(
-                          width: 250,
-                          height: 250,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      state.drinkInfo.strDrinkThumb!))),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          state.drinkInfo.strDrink!,
-                          style: ConstantText.smallGradientText,
-                        )
-                      ],
+                    return GestureDetector(
+                      onTap: () {
+                        AutoRouter.of(context).push(CocktailDetailRoute(
+                            cocktailId: state.drinkInfo.idDrink!));
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 250,
+                            height: 250,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        state.drinkInfo.strDrinkThumb!))),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            state.drinkInfo.strDrink!,
+                            style: ConstantText.smallGradientText,
+                          )
+                        ],
+                      ),
                     );
                   }
                   return Container();
@@ -179,28 +202,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 15,
               ),
               Container(
-                height: 850,
+                padding: EdgeInsets.only(bottom: 10),
                 width: MediaQuery.of(context).size.width,
-                child: Expanded(
-                  child: BlocBuilder<PopularDrinksCubit, PopularDrinksState>(
-                    builder: (context, state) {
-                      if (state is PopularDrinksLoading) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                              color: ConstantColors.blueColor),
-                        );
-                      }
-                      if (state is PopularDrinksLoaded) {
-                        return GridView.builder(
-                          shrinkWrap: true,
-                          itemCount: 8,
-                          scrollDirection: Axis.vertical,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
-                          itemBuilder: (context, index) {
-                            return Column(
+                child: BlocBuilder<PopularDrinksCubit, PopularDrinksState>(
+                  builder: (context, state) {
+                    if (state is PopularDrinksLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                            color: ConstantColors.blueColor),
+                      );
+                    }
+                    if (state is PopularDrinksLoaded) {
+                      return GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: 8,
+                        scrollDirection: Axis.vertical,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisSpacing: 20,
+                                mainAxisExtent: 200,
+                                crossAxisCount: 2),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              AutoRouter.of(context).push(CocktailDetailRoute(
+                                  cocktailId:
+                                      state.popularDrinks[index].idDrink!));
+                            },
+                            child: Column(
                               children: [
                                 Expanded(
                                   child: Container(
@@ -208,8 +238,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 170,
                                     height: 300,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(30),
                                       image: DecorationImage(
+                                        fit: BoxFit.fill,
                                         image: NetworkImage(state
                                             .popularDrinks[index]
                                             .strDrinkThumb!),
@@ -222,13 +253,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: ConstantText.smallRandomGradientText,
                                 ),
                               ],
-                            );
-                          },
-                        );
-                      }
-                      return Container();
-                    },
-                  ),
+                            ),
+                          );
+                        },
+                      );
+                    }
+                    return Container();
+                  },
                 ),
               ),
             ],

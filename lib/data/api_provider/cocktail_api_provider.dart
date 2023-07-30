@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-import '../jsons/popular_drinks_json.dart';
-import '../model/cocktail_model.dart';
+import '../../jsons/popular_drinks_json.dart';
+import '../../model/cocktail_model.dart';
 
 class CocktailApiProvider {
   Client client = Client();

@@ -15,6 +15,25 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    CocktailDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<CocktailDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CocktailDetailScreen(cocktailId: args.cocktailId),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LoginScreen(),
+      );
+    },
+    RegisterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterScreen(),
+      );
+    },
     FavoriteRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -45,14 +64,64 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SearchScreen(),
       );
     },
-    CocktailDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<CocktailDetailRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CocktailDetailScreen(cocktailId: args.cocktailId),
-      );
-    },
   };
+}
+
+/// generated route for
+/// [CocktailDetailScreen]
+class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
+  CocktailDetailRoute({
+    required String cocktailId,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CocktailDetailRoute.name,
+          args: CocktailDetailRouteArgs(cocktailId: cocktailId),
+          initialChildren: children,
+        );
+
+  static const String name = 'CocktailDetailRoute';
+
+  static const PageInfo<CocktailDetailRouteArgs> page =
+      PageInfo<CocktailDetailRouteArgs>(name);
+}
+
+class CocktailDetailRouteArgs {
+  const CocktailDetailRouteArgs({required this.cocktailId});
+
+  final String cocktailId;
+
+  @override
+  String toString() {
+    return 'CocktailDetailRouteArgs{cocktailId: $cocktailId}';
+  }
+}
+
+/// generated route for
+/// [LoginScreen]
+class LoginRoute extends PageRouteInfo<void> {
+  const LoginRoute({List<PageRouteInfo>? children, required Null Function(dynamic success) onResult})
+      : super(
+          LoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RegisterScreen]
+class RegisterRoute extends PageRouteInfo<void> {
+  const RegisterRoute({List<PageRouteInfo>? children})
+      : super(
+          RegisterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -123,33 +192,4 @@ class SearchRoute extends PageRouteInfo<void> {
   static const String name = 'SearchRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [CocktailDetailScreen]
-class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
-  CocktailDetailRoute({
-    required String cocktailId,
-    List<PageRouteInfo>? children,
-  }) : super(
-          CocktailDetailRoute.name,
-          args: CocktailDetailRouteArgs(cocktailId: cocktailId),
-          initialChildren: children,
-        );
-
-  static const String name = 'CocktailDetailRoute';
-
-  static const PageInfo<CocktailDetailRouteArgs> page =
-      PageInfo<CocktailDetailRouteArgs>(name);
-}
-
-class CocktailDetailRouteArgs {
-  const CocktailDetailRouteArgs({required this.cocktailId});
-
-  final String cocktailId;
-
-  @override
-  String toString() {
-    return 'CocktailDetailRouteArgs{cocktailId: $cocktailId}';
-  }
 }

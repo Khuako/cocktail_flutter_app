@@ -1,14 +1,11 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/cubit/auth_cubit.dart';
 import 'package:cocktail_project/data/repositories/auth_repository.dart';
 import 'package:cocktail_project/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
-
 import '../../../constants/constant_text.dart';
+import '../../../widgets/snack_bar.dart';
 
 @RoutePage()
 class RegisterScreen extends StatefulWidget {
@@ -77,10 +74,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextFormField(
                   style: ConstantText.titleTextStyle,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Email is empty';
-                    }
-                    return null;
+                    return RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value!)
+                        ? null
+                        : "Please Enter A Valid Email";
                   },
                   controller: _email,
                   decoration: InputDecoration(
@@ -102,11 +100,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 15,
                 ),
                 TextFormField(
+                  obscureText: true,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Password is empty';
+                    if (value!.length < 6) {
+                      return "Password must be at least 6 characters";
+                    } else {
+                      return null;
                     }
-                    return null;
                   },
                   controller: _password,
                   style: ConstantText.titleTextStyle,
@@ -133,24 +133,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: double.infinity,
                   height: 44,
                   child: ElevatedButton(
-                    onPressed: () async{
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
+
                         await context.read<AuthCubit>().signUp(
-                            email: _email.text, password: _password.text);
-                            AutoRouter.of(context).pushAndPopUntil(
-              LoginRoute(
-                onResult: (success) => null,
-              ),
-              predicate: (_) => false);
+                            email: _email.text,
+                            password: _password.text,
+                            context: context);
                       }
                     },
-                    child: Text(
-                      'Register',
-                      style: ConstantText.titleTextStyle,
-                    ),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey.shade800),
+                    child: BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) {
+                        if (state is AuthLoading) {
+                          return const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Center(
+                              child:
+                                  CircularProgressIndicator(color: Colors.grey),
+                            ),
+                          );
+                        }
+                        return Text(
+                          'Register',
+                          style: ConstantText.titleTextStyle,
+                        );
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(

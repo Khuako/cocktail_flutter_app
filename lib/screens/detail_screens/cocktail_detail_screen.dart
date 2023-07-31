@@ -2,26 +2,38 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/constants/constant_colors.dart';
 import 'package:cocktail_project/constants/constant_text.dart';
 import 'package:cocktail_project/cubit/cocktail_detail_cubit.dart';
+import 'package:cocktail_project/cubit/favorite_cubit.dart';
+import 'package:cocktail_project/cubit/favorite_list_cubit.dart';
+import 'package:cocktail_project/data/repositories/auth_repository.dart';
+import 'package:cocktail_project/data/repositories/database_repository.dart';
 import 'package:cocktail_project/model/cocktail_model.dart';
+import 'package:cocktail_project/widgets/snack_bar.dart';
 import 'package:cocktail_project/widgets/tag_card_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 
 @RoutePage()
 class CocktailDetailScreen extends StatefulWidget {
   String cocktailId;
-
-  CocktailDetailScreen({required this.cocktailId});
+  String imageUrl;
+  String title;
+  CocktailDetailScreen(
+      {required this.cocktailId, required this.imageUrl, required this.title});
 
   @override
   State<CocktailDetailScreen> createState() => _CocktailDetailScreenState();
 }
 
 class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
+  Future<bool>? isFavored;
   @override
   void initState() {
     context.read<CocktailDetailCubit>().fetchCocktailById(widget.cocktailId);
+    context
+        .read<FavoriteCubit>()
+        .checkIfFavored(widget.imageUrl, widget.title, widget.cocktailId);
     super.initState();
   }
 
@@ -122,9 +134,6 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
     }
   }
 
-  String testDes =
-      'Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass.';
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CocktailDetailCubit, CocktailDetailState>(
@@ -200,13 +209,50 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                       Positioned(
                         top: 50,
                         right: 15,
-                        child: IconButton(
-                          iconSize: 30,
-                          icon: const Icon(
-                            Icons.favorite_outline_rounded,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {},
+                        child: BlocBuilder<FavoriteCubit, FavoriteState>(
+                          builder: (context, state) {
+                            if (state is FavoriteRed) {
+                              return IconButton(
+                                iconSize: 30,
+                                icon: const Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () async {
+                                   showSnackBar(context, Colors.black,
+                                      'Cocktail was removed from favorite');
+                                  await context
+                                      .read<FavoriteCubit>()
+                                      .addOrRemove(widget.imageUrl,
+                                          widget.title, widget.cocktailId);
+                                          
+                                            await context
+                                    .read<FavoriteListCubit>()
+                                    .fetchFavoriteList();
+                                },
+                              );
+                            }
+
+                            return IconButton(
+                              iconSize: 30,
+                              icon: const Icon(
+                                Icons.favorite_outline_rounded,
+                                color: Colors.white,
+                              ),
+                              onPressed: () async {
+                                      showSnackBar(context, Colors.black,
+                                    'Cocktail was added to favorite');
+                                await context.read<FavoriteCubit>().addOrRemove(
+                                    widget.imageUrl,
+                                    widget.title,
+                                    widget.cocktailId);
+                          
+                                await context
+                                    .read<FavoriteListCubit>()
+                                    .fetchFavoriteList();
+                              },
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -282,7 +328,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                                               textAlign: TextAlign.center,
                                             )
                                           : Text(
-                                              '${mes[index]}${ing[index]}',
+                                              '${mes[index]} ${ing[index]}',
                                               style: ConstantText.ingText,
                                               textAlign: TextAlign.center,
                                             ),

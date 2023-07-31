@@ -19,7 +19,11 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<CocktailDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: CocktailDetailScreen(cocktailId: args.cocktailId),
+        child: CocktailDetailScreen(
+          cocktailId: args.cocktailId,
+          imageUrl: args.imageUrl,
+          title: args.title,
+        ),
       );
     },
     LoginRoute.name: (routeData) {
@@ -72,10 +76,16 @@ abstract class _$AppRouter extends RootStackRouter {
 class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
   CocktailDetailRoute({
     required String cocktailId,
+    required String imageUrl,
+    required String title,
     List<PageRouteInfo>? children,
   }) : super(
           CocktailDetailRoute.name,
-          args: CocktailDetailRouteArgs(cocktailId: cocktailId),
+          args: CocktailDetailRouteArgs(
+            cocktailId: cocktailId,
+            imageUrl: imageUrl,
+            title: title,
+          ),
           initialChildren: children,
         );
 
@@ -86,13 +96,21 @@ class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
 }
 
 class CocktailDetailRouteArgs {
-  const CocktailDetailRouteArgs({required this.cocktailId});
+  const CocktailDetailRouteArgs({
+    required this.cocktailId,
+    required this.imageUrl,
+    required this.title,
+  });
 
   final String cocktailId;
 
+  final String imageUrl;
+
+  final String title;
+
   @override
   String toString() {
-    return 'CocktailDetailRouteArgs{cocktailId: $cocktailId}';
+    return 'CocktailDetailRouteArgs{cocktailId: $cocktailId, imageUrl: $imageUrl, title: $title}';
   }
 }
 

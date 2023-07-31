@@ -51,10 +51,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextFormField(
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Email is empty';
-                    }
-                    return null;
+                    return RegExp(
+                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value!)
+                        ? null
+                        : "Please Enter A Valid Email";
                   },
                   style: ConstantText.titleTextStyle,
                   controller: _email,
@@ -85,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   style: ConstantText.titleTextStyle,
                   controller: _password,
+                  obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     labelStyle: ConstantText.tagText,
@@ -112,9 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
                         await context.read<AuthCubit>().signIn(
-                            email: _email.text, password: _password.text);
-                        AutoRouter.of(context).pushAndPopUntil(const MainRoute(),
-                            predicate: (_) => false);
+                            email: _email.text,
+                            password: _password.text,
+                            context: context);
                       }
                     },
                     style: ElevatedButton.styleFrom(

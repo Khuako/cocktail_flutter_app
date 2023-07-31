@@ -1,3 +1,4 @@
+import 'package:cocktail_project/constants/constant_text.dart';
 import 'package:flutter/material.dart';
 
 void showSnackBar(context, color, message) {
@@ -5,7 +6,7 @@ void showSnackBar(context, color, message) {
     SnackBar(
       content: Text(
         message,
-        style: const TextStyle(fontSize: 14),
+        style: ConstantText.tagText,
       ),
       backgroundColor: color,
       duration: const Duration(seconds: 2),

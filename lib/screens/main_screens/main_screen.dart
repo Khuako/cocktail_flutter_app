@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
           children: pages,
         ),
         bottomNavigationBar: AnimatedBottomNavigationBar(
-          gapLocation: GapLocation.center,
+          gapLocation: GapLocation.none,
           backgroundColor: ConstantColors.lightBlack,
           activeColor: colors[_bottomNavIndex],
           inactiveColor: Colors.grey,

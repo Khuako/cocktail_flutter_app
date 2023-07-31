@@ -88,7 +88,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       AutoRouter.of(context).push(
                                           CocktailDetailRoute(
                                               cocktailId: state
-                                                  .alcoDrinks[index].idDrink!));
+                                                  .alcoDrinks[index].idDrink!,
+                                              imageUrl: state.alcoDrinks[index]
+                                                  .strDrinkThumb!,
+                                              title: state.alcoDrinks[index]
+                                                  .strDrink!));
                                     },
                                     child: ListWidget(
                                         cockName:
@@ -119,9 +123,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return GestureDetector(
                                     onTap: () {
                                       AutoRouter.of(context).push(
-                                          CocktailDetailRoute(
+                                         CocktailDetailRoute(
                                               cocktailId: state
-                                                  .alcoDrinks[index].idDrink!));
+                                                  .alcoDrinks[index].idDrink!,
+                                              imageUrl: state.alcoDrinks[index]
+                                                  .strDrinkThumb!,
+                                              title: state.alcoDrinks[index]
+                                                  .strDrink!));
                                     },
                                     child: ListWidget(
                                         cockName:
@@ -164,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return GestureDetector(
                       onTap: () {
                         AutoRouter.of(context).push(CocktailDetailRoute(
-                            cocktailId: state.drinkInfo.idDrink!));
+                            cocktailId: state.drinkInfo.idDrink!, imageUrl: state.drinkInfo.strDrinkThumb!, title: state.drinkInfo.strDrink!));
                       },
                       child: Column(
                         children: [
@@ -228,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               AutoRouter.of(context).push(CocktailDetailRoute(
                                   cocktailId:
-                                      state.popularDrinks[index].idDrink!));
+                                      state.popularDrinks[index].idDrink!, imageUrl: state.popularDrinks[index].strDrinkThumb!, title: state.popularDrinks[index].strDrink!));
                             },
                             child: Column(
                               children: [

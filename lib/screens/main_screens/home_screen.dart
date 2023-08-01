@@ -6,11 +6,14 @@ import 'package:cocktail_project/cubit/non_alco_list_cubit.dart';
 import 'package:cocktail_project/cubit/popular_drinks_cubit.dart';
 import 'package:cocktail_project/cubit/random_cocktail_cubit.dart';
 import 'package:cocktail_project/routes/routes.dart';
+import 'package:cocktail_project/widgets/image_and_tite_widget.dart';
 import 'package:cocktail_project/widgets/list_widget.dart';
 import 'package:cocktail_project/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../constants/navigate_to_detail.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -50,14 +53,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           categories[index],
                           style: GoogleFonts.openSans(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: _alcIndex == index
+                                ? FontWeight.bold
+                                : FontWeight.w400,
                             color: _alcIndex == index
-                                ? ConstantColors.blueColor
+                                ? Colors.yellow
                                 : Colors.white,
                             decoration: _alcIndex == index
                                 ? TextDecoration.underline
                                 : null,
-                            decorationColor: ConstantColors.blueColor,
+                            decorationColor: Colors.yellow,
                             decorationThickness: 0.5,
                           ),
                         ),
@@ -85,14 +90,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 if (state is AlcoListLoaded) {
                                   return GestureDetector(
                                     onTap: () {
-                                      AutoRouter.of(context).push(
-                                          CocktailDetailRoute(
-                                              cocktailId: state
-                                                  .alcoDrinks[index].idDrink!,
-                                              imageUrl: state.alcoDrinks[index]
-                                                  .strDrinkThumb!,
-                                              title: state.alcoDrinks[index]
-                                                  .strDrink!));
+                                      navigateToDetail(
+                                          cocktailId:
+                                              state.alcoDrinks[index].idDrink!,
+                                          imageUrl: state
+                                              .alcoDrinks[index].strDrinkThumb!,
+                                          title:
+                                              state.alcoDrinks[index].strDrink!,
+                                          context: context);
                                     },
                                     child: ListWidget(
                                         cockName:
@@ -122,14 +127,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 if (state is NonAlcoListLoaded) {
                                   return GestureDetector(
                                     onTap: () {
-                                      AutoRouter.of(context).push(
-                                         CocktailDetailRoute(
-                                              cocktailId: state
-                                                  .alcoDrinks[index].idDrink!,
-                                              imageUrl: state.alcoDrinks[index]
-                                                  .strDrinkThumb!,
-                                              title: state.alcoDrinks[index]
-                                                  .strDrink!));
+                                      navigateToDetail(
+                                          cocktailId:
+                                              state.alcoDrinks[index].idDrink!,
+                                          imageUrl: state
+                                              .alcoDrinks[index].strDrinkThumb!,
+                                          title:
+                                              state.alcoDrinks[index].strDrink!,
+                                          context: context);
                                     },
                                     child: ListWidget(
                                         cockName:
@@ -171,28 +176,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (state is RandomCocktailLoaded) {
                     return GestureDetector(
                       onTap: () {
-                        AutoRouter.of(context).push(CocktailDetailRoute(
-                            cocktailId: state.drinkInfo.idDrink!, imageUrl: state.drinkInfo.strDrinkThumb!, title: state.drinkInfo.strDrink!));
+                        navigateToDetail(
+                            cocktailId: state.drinkInfo.idDrink!,
+                            imageUrl: state.drinkInfo.strDrinkThumb!,
+                            title: state.drinkInfo.strDrink!,
+                            context: context);
                       },
-                      child: Column(
-                        children: [
-                          Container(
-                            width: 250,
-                            height: 250,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        state.drinkInfo.strDrinkThumb!))),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            state.drinkInfo.strDrink!,
-                            style: ConstantText.smallGradientText,
-                          )
-                        ],
+                      child: ImageAndTitleWidget(
+                        imageUrl: state.drinkInfo.strDrinkThumb!,
+                        title: state.drinkInfo.strDrink!,
+                        style: ConstantText.smallGradientText,
                       ),
                     );
                   }
@@ -234,9 +227,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              AutoRouter.of(context).push(CocktailDetailRoute(
+                              navigateToDetail(
                                   cocktailId:
-                                      state.popularDrinks[index].idDrink!, imageUrl: state.popularDrinks[index].strDrinkThumb!, title: state.popularDrinks[index].strDrink!));
+                                      state.popularDrinks[index].idDrink!,
+                                  imageUrl:
+                                      state.popularDrinks[index].strDrinkThumb!,
+                                  title: state.popularDrinks[index].strDrink!,
+                                  context: context);
                             },
                             child: Column(
                               children: [

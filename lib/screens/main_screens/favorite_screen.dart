@@ -7,6 +7,8 @@ import 'package:cocktail_project/widgets/list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../constants/navigate_to_detail.dart';
+
 @RoutePage()
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -56,10 +58,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               state.favDrinks![index].split('_');
                           return GestureDetector(
                             onTap: () {
-                              AutoRouter.of(context).push(CocktailDetailRoute(
+                              navigateToDetail(
                                   cocktailId: currentCocktail[2],
                                   imageUrl: currentCocktail[0],
-                                  title: currentCocktail[1]));
+                                  title: currentCocktail[1],
+                                  context: context);
                             },
                             child: ListWidget(
                                 cockName: currentCocktail[1],

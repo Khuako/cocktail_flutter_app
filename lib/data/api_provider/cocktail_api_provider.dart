@@ -22,7 +22,11 @@ class CocktailApiProvider {
 
   Future<DrinkInfo> fetchRandomCocktail() async {
     final response = await client.get(Uri.parse(baseUrl + randomCocktail));
-    return Cocktail.fromJson(json.decode(response.body)).drinks![0];
+    if (response.statusCode == 200) {
+      return Cocktail.fromJson(json.decode(response.body)).drinks![0];
+    } else {
+      return Future.error('Error response');
+    }
   }
 
   Future<List<Drinks>> fetchPopularDrinks() async {
@@ -31,9 +35,19 @@ class CocktailApiProvider {
 
   Future<DrinkInfo> fetchCocktailById(String cocktailId) async {
     final response =
-        await client.get(Uri.parse(baseUrl + 'lookup.php?i=' + cocktailId));
+        await client.get(Uri.parse('${baseUrl}lookup.php?i=$cocktailId'));
     if (response.statusCode == 200) {
       return Cocktail.fromJson(json.decode(response.body)).drinks![0];
+    } else {
+      return Future.error('Error response');
+    }
+  }
+
+  Future<Cocktail> fetchSearchList(String query) async {
+    final response =
+        await client.get(Uri.parse('${baseUrl}search.php?s=$query'));
+    if (response.statusCode == 200) {
+      return Cocktail.fromJson(json.decode(response.body));
     } else {
       return Future.error('Error response');
     }

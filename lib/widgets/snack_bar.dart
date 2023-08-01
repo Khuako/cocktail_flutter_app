@@ -9,7 +9,7 @@ void showSnackBar(context, color, message) {
         style: ConstantText.tagText,
       ),
       backgroundColor: color,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 1),
       action: SnackBarAction(
         label: "OK",
         textColor: Colors.white,

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/constants/constant_colors.dart';
 import 'package:cocktail_project/constants/constant_text.dart';
@@ -211,47 +213,99 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                         right: 15,
                         child: BlocBuilder<FavoriteCubit, FavoriteState>(
                           builder: (context, state) {
-                            if (state is FavoriteRed) {
-                              return IconButton(
-                                iconSize: 30,
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () async {
-                                   showSnackBar(context, Colors.black,
-                                      'Cocktail was removed from favorite');
-                                  await context
-                                      .read<FavoriteCubit>()
-                                      .addOrRemove(widget.imageUrl,
-                                          widget.title, widget.cocktailId);
-                                          
-                                            await context
-                                    .read<FavoriteListCubit>()
-                                    .fetchFavoriteList();
-                                },
-                              );
-                            }
+                            return AnimatedSwitcher(
+                              duration: Duration(milliseconds: 250),
+                              child: state is FavoriteRed
+                                  ? Container(
+                                      key: UniqueKey(),
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          showSnackBar(context, Colors.black,
+                                              'Cocktail was removed from favorite');
+                                          await context
+                                              .read<FavoriteCubit>()
+                                              .addOrRemove(
+                                                  widget.imageUrl,
+                                                  widget.title,
+                                                  widget.cocktailId);
 
-                            return IconButton(
-                              iconSize: 30,
-                              icon: const Icon(
-                                Icons.favorite_outline_rounded,
-                                color: Colors.white,
-                              ),
-                              onPressed: () async {
-                                      showSnackBar(context, Colors.black,
-                                    'Cocktail was added to favorite');
-                                await context.read<FavoriteCubit>().addOrRemove(
-                                    widget.imageUrl,
-                                    widget.title,
-                                    widget.cocktailId);
-                          
-                                await context
-                                    .read<FavoriteListCubit>()
-                                    .fetchFavoriteList();
-                              },
+                                          await context
+                                              .read<FavoriteListCubit>()
+                                              .fetchFavoriteList();
+                                        },
+                                        icon: const Icon(
+                                          Icons.favorite,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      key: UniqueKey(),
+                                      child: IconButton(
+                                        iconSize: 30,
+                                        icon: const Icon(
+                                          Icons.favorite_outline_rounded,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () async {
+                                          showSnackBar(context, Colors.black,
+                                              'Cocktail was added to favorite');
+                                          await context
+                                              .read<FavoriteCubit>()
+                                              .addOrRemove(
+                                                  widget.imageUrl,
+                                                  widget.title,
+                                                  widget.cocktailId);
+
+                                          await context
+                                              .read<FavoriteListCubit>()
+                                              .fetchFavoriteList();
+                                        },
+                                      ),
+                                    ),
                             );
+                            // if (state is FavoriteRed) {
+
+                            // return IconButton(
+                            //   iconSize: 30,
+                            //   icon: const Icon(
+                            //     Icons.favorite,
+                            //     color: Colors.red,
+                            //   ),
+                            // onPressed: () async {
+                            //   showSnackBar(context, Colors.black,
+                            //       'Cocktail was removed from favorite');
+                            //   await context
+                            //       .read<FavoriteCubit>()
+                            //       .addOrRemove(widget.imageUrl,
+                            //           widget.title, widget.cocktailId);
+
+                            //   await context
+                            //       .read<FavoriteListCubit>()
+                            //       .fetchFavoriteList();
+                            // },
+                            //   );
+                            // }
+
+                            // return IconButton(
+                            //   iconSize: 30,
+                            //   icon: const Icon(
+                            //     Icons.favorite_outline_rounded,
+                            //     color: Colors.white,
+                            //   ),
+                            //   onPressed: () async {
+                            //     showSnackBar(context, Colors.black,
+                            //         'Cocktail was added to favorite');
+                            //     await context.read<FavoriteCubit>().addOrRemove(
+                            //         widget.imageUrl,
+                            //         widget.title,
+                            //         widget.cocktailId);
+
+                            //     await context
+                            //         .read<FavoriteListCubit>()
+                            //         .fetchFavoriteList();
+                            //   },
+                            // );
                           },
                         ),
                       ),

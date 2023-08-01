@@ -15,6 +15,12 @@ class ConstantText {
       color: Colors.white70,
       fontWeight: FontWeight.w600,
       decoration: TextDecoration.none);
+  static TextStyle hintStyle = GoogleFonts.openSans(
+      fontSize: 16,
+      color: Colors.white70,
+      fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none,
+      fontStyle: FontStyle.italic);
   static TextStyle ingText = GoogleFonts.openSans(
       fontSize: 16,
       color: Colors.white70,
@@ -28,6 +34,16 @@ class ConstantText {
         colors: <Color>[Colors.blue, Colors.purple],
       ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
   );
+  static TextStyle searchText = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w900,
+    fontStyle: FontStyle.italic,
+    foreground: Paint()
+      ..shader = const LinearGradient(
+        colors: <Color>[Colors.blue, Colors.purple, Colors.white, Colors.grey],
+      ).createShader(Rect.fromLTWH(0, 0, 250.0, 70.0)),
+  );
+
   static TextStyle smallGradientText = GoogleFonts.openSans(
     fontSize: 20,
     fontWeight: FontWeight.w600,

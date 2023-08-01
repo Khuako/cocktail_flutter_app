@@ -39,6 +39,9 @@ class _SearchScreenState extends State<SearchScreen> {
             style: ConstantText.titleTextStyle,
             controller: searchController,
             cursorColor: Colors.grey.shade800,
+            onTapOutside: (event) {
+              FocusScope.of(context).unfocus();
+            },
             decoration: InputDecoration(
               hintText: "eg: Margarita",
               hintStyle: ConstantText.hintStyle,

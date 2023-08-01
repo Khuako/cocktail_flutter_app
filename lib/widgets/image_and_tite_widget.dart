@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/constant_text.dart';
@@ -21,8 +22,22 @@ class ImageAndTitleWidget extends StatelessWidget {
           width: 250,
           height: 250,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              image: DecorationImage(image: NetworkImage(imageUrl))),
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: ClipRRect(
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.cover,
+              maxHeightDiskCache: 400,
+              maxWidthDiskCache: 400,
+              placeholder: (context, url) => Container(
+                width: 250,
+                height: 250,
+                color: Theme.of(context).scaffoldBackgroundColor,
+              ),
+            ),
+            borderRadius: BorderRadius.circular(25),
+          ),
         ),
         const SizedBox(
           height: 10,

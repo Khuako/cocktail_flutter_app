@@ -25,6 +25,7 @@ class ConstantText {
       fontSize: 16,
       color: Colors.white70,
       fontWeight: FontWeight.w600,
+      fontStyle: FontStyle.italic,
       decoration: TextDecoration.none);
   static TextStyle bigGradientText = TextStyle(
     fontSize: 20,

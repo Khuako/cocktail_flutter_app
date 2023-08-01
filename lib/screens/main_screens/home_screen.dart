@@ -105,10 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         cockImage: state
                                             .alcoDrinks[index].strDrinkThumb!),
                                   );
-                                } else if (state is AlcoListFailure) {
-                                  showSnackBar(
-                                      context, Colors.red, state.e.toString());
-                                }
+                                } 
                                 return Container();
                               },
                             )

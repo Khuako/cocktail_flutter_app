@@ -13,7 +13,7 @@ class PopularDrinksLoading extends PopularDrinksState {}
 
 class PopularDrinksLoaded extends PopularDrinksState {
   final List<Drinks> popularDrinks;
-  PopularDrinksLoaded({required this.popularDrinks});
+  const PopularDrinksLoaded({required this.popularDrinks});
 }
 
 class PopularDrinksFailure extends PopularDrinksState {}

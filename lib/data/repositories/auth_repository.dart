@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:cocktail_project/data/repositories/database_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,10 +12,8 @@ class AuthRepository {
       User user = (await firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password))
           .user!;
-      if (user != null) {
-        await DatabaseReposiory(user.uid).saveUserData(email);
-        return true;
-      }
+      await DatabaseReposiory(user.uid).saveUserData(email);
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw Exception('This password is too weak');
@@ -27,9 +27,6 @@ class AuthRepository {
 
   Future signIn({required String email, required String password}) async {
     try {
-      User user = (await firebaseAuth.signInWithEmailAndPassword(
-              email: email, password: password))
-          .user!;
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

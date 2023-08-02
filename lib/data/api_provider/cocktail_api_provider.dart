@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'package:cocktail_project/model/alcoholic_model.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 import '../../jsons/popular_drinks_json.dart';

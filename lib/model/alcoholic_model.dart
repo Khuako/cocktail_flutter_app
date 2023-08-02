@@ -7,15 +7,15 @@ class AlcoholicModel {
     if (json['drinks'] != null) {
       drinks = <Drinks>[];
       json['drinks'].forEach((v) {
-        drinks!.add(new Drinks.fromJson(v));
+        drinks!.add(Drinks.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.drinks != null) {
-      data['drinks'] = this.drinks!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (drinks != null) {
+      data['drinks'] = drinks!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -35,10 +35,10 @@ class Drinks {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['strDrink'] = this.strDrink;
-    data['strDrinkThumb'] = this.strDrinkThumb;
-    data['idDrink'] = this.idDrink;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['strDrink'] = strDrink;
+    data['strDrinkThumb'] = strDrinkThumb;
+    data['idDrink'] = idDrink;
     return data;
   }
 }

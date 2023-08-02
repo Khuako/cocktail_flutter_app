@@ -7,7 +7,7 @@ import 'package:cocktail_project/cubit/non_alco_list_cubit.dart';
 import 'package:cocktail_project/cubit/popular_drinks_cubit.dart';
 import 'package:cocktail_project/cubit/random_cocktail_cubit.dart';
 import 'package:cocktail_project/cubit/search_cubit.dart';
-import 'package:cocktail_project/data/repositories/auth_repository.dart';
+
 import 'package:cocktail_project/routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +18,13 @@ void main() async {
   await Firebase.initializeApp();
   runApp(BlocProvider(
     create: (context) => AuthCubit(),
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }

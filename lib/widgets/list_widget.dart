@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cocktail_project/constants/constant_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,7 @@ import 'package:flutter/material.dart';
 class ListWidget extends StatelessWidget {
   String cockName;
   String cockImage;
-  ListWidget({required this.cockName, required this.cockImage});
+  ListWidget({super.key, required this.cockName, required this.cockImage});
 
   @override
   Widget build(BuildContext context) {

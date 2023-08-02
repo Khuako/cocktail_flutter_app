@@ -1,10 +1,9 @@
 import 'package:cocktail_project/constants/constant_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TagCardWidget extends StatelessWidget {
-  String title;
-  TagCardWidget({required this.title});
+  final String title;
+  const TagCardWidget({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

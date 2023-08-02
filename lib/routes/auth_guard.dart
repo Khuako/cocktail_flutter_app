@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cocktail_project/cubit/auth_cubit.dart';
+
 import 'package:cocktail_project/data/repositories/auth_repository.dart';
 import 'package:cocktail_project/routes/routes.dart';
 

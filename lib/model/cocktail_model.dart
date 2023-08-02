@@ -7,15 +7,15 @@ class Cocktail {
     if (json['drinks'] != null) {
       drinks = <DrinkInfo>[];
       json['drinks'].forEach((v) {
-        drinks!.add(new DrinkInfo.fromJson(v));
+        drinks!.add(DrinkInfo.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.drinks != null) {
-      data['drinks'] = this.drinks!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (drinks != null) {
+      data['drinks'] = drinks!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -182,58 +182,58 @@ class DrinkInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idDrink'] = this.idDrink;
-    data['strDrink'] = this.strDrink;
-    data['strDrinkAlternate'] = this.strDrinkAlternate;
-    data['strTags'] = this.strTags;
-    data['strVideo'] = this.strVideo;
-    data['strCategory'] = this.strCategory;
-    data['strIBA'] = this.strIBA;
-    data['strAlcoholic'] = this.strAlcoholic;
-    data['strGlass'] = this.strGlass;
-    data['strInstructions'] = this.strInstructions;
-    data['strInstructionsES'] = this.strInstructionsES;
-    data['strInstructionsDE'] = this.strInstructionsDE;
-    data['strInstructionsFR'] = this.strInstructionsFR;
-    data['strInstructionsIT'] = this.strInstructionsIT;
-    data['strInstructionsZH-HANS'] = this.strInstructionsZHHANS;
-    data['strInstructionsZH-HANT'] = this.strInstructionsZHHANT;
-    data['strDrinkThumb'] = this.strDrinkThumb;
-    data['strIngredient1'] = this.strIngredient1;
-    data['strIngredient2'] = this.strIngredient2;
-    data['strIngredient3'] = this.strIngredient3;
-    data['strIngredient4'] = this.strIngredient4;
-    data['strIngredient5'] = this.strIngredient5;
-    data['strIngredient6'] = this.strIngredient6;
-    data['strIngredient7'] = this.strIngredient7;
-    data['strIngredient8'] = this.strIngredient8;
-    data['strIngredient9'] = this.strIngredient9;
-    data['strIngredient10'] = this.strIngredient10;
-    data['strIngredient11'] = this.strIngredient11;
-    data['strIngredient12'] = this.strIngredient12;
-    data['strIngredient13'] = this.strIngredient13;
-    data['strIngredient14'] = this.strIngredient14;
-    data['strIngredient15'] = this.strIngredient15;
-    data['strMeasure1'] = this.strMeasure1;
-    data['strMeasure2'] = this.strMeasure2;
-    data['strMeasure3'] = this.strMeasure3;
-    data['strMeasure4'] = this.strMeasure4;
-    data['strMeasure5'] = this.strMeasure5;
-    data['strMeasure6'] = this.strMeasure6;
-    data['strMeasure7'] = this.strMeasure7;
-    data['strMeasure8'] = this.strMeasure8;
-    data['strMeasure9'] = this.strMeasure9;
-    data['strMeasure10'] = this.strMeasure10;
-    data['strMeasure11'] = this.strMeasure11;
-    data['strMeasure12'] = this.strMeasure12;
-    data['strMeasure13'] = this.strMeasure13;
-    data['strMeasure14'] = this.strMeasure14;
-    data['strMeasure15'] = this.strMeasure15;
-    data['strImageSource'] = this.strImageSource;
-    data['strImageAttribution'] = this.strImageAttribution;
-    data['strCreativeCommonsConfirmed'] = this.strCreativeCommonsConfirmed;
-    data['dateModified'] = this.dateModified;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['idDrink'] = idDrink;
+    data['strDrink'] = strDrink;
+    data['strDrinkAlternate'] = strDrinkAlternate;
+    data['strTags'] = strTags;
+    data['strVideo'] = strVideo;
+    data['strCategory'] = strCategory;
+    data['strIBA'] = strIBA;
+    data['strAlcoholic'] = strAlcoholic;
+    data['strGlass'] = strGlass;
+    data['strInstructions'] = strInstructions;
+    data['strInstructionsES'] = strInstructionsES;
+    data['strInstructionsDE'] = strInstructionsDE;
+    data['strInstructionsFR'] = strInstructionsFR;
+    data['strInstructionsIT'] = strInstructionsIT;
+    data['strInstructionsZH-HANS'] = strInstructionsZHHANS;
+    data['strInstructionsZH-HANT'] = strInstructionsZHHANT;
+    data['strDrinkThumb'] = strDrinkThumb;
+    data['strIngredient1'] = strIngredient1;
+    data['strIngredient2'] = strIngredient2;
+    data['strIngredient3'] = strIngredient3;
+    data['strIngredient4'] = strIngredient4;
+    data['strIngredient5'] = strIngredient5;
+    data['strIngredient6'] = strIngredient6;
+    data['strIngredient7'] = strIngredient7;
+    data['strIngredient8'] = strIngredient8;
+    data['strIngredient9'] = strIngredient9;
+    data['strIngredient10'] = strIngredient10;
+    data['strIngredient11'] = strIngredient11;
+    data['strIngredient12'] = strIngredient12;
+    data['strIngredient13'] = strIngredient13;
+    data['strIngredient14'] = strIngredient14;
+    data['strIngredient15'] = strIngredient15;
+    data['strMeasure1'] = strMeasure1;
+    data['strMeasure2'] = strMeasure2;
+    data['strMeasure3'] = strMeasure3;
+    data['strMeasure4'] = strMeasure4;
+    data['strMeasure5'] = strMeasure5;
+    data['strMeasure6'] = strMeasure6;
+    data['strMeasure7'] = strMeasure7;
+    data['strMeasure8'] = strMeasure8;
+    data['strMeasure9'] = strMeasure9;
+    data['strMeasure10'] = strMeasure10;
+    data['strMeasure11'] = strMeasure11;
+    data['strMeasure12'] = strMeasure12;
+    data['strMeasure13'] = strMeasure13;
+    data['strMeasure14'] = strMeasure14;
+    data['strMeasure15'] = strMeasure15;
+    data['strImageSource'] = strImageSource;
+    data['strImageAttribution'] = strImageAttribution;
+    data['strCreativeCommonsConfirmed'] = strCreativeCommonsConfirmed;
+    data['dateModified'] = dateModified;
     return data;
   }
 }

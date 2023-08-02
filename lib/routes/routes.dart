@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cocktail_project/cubit/auth_cubit.dart';
 import 'package:cocktail_project/routes/auth_guard.dart';
 import 'package:cocktail_project/screens/main_screens/auth/register_screen.dart';
 

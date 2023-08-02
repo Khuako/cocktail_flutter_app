@@ -2,9 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/constants/navigate_to_detail.dart';
 import 'package:cocktail_project/cubit/search_cubit.dart';
 import 'package:cocktail_project/widgets/image_and_tite_widget.dart';
-import 'package:cocktail_project/widgets/list_widget.dart';
-import 'package:cocktail_project/widgets/tag_card_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -101,7 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 }
                 if (state is SearchFound) {
                   return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: state.searchList.length,
                     itemExtent: 320,

@@ -2,7 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:cocktail_project/data/api_provider/cocktail_api_provider.dart';
 import 'package:cocktail_project/model/alcoholic_model.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+
 
 part 'alco_list_state.dart';
 

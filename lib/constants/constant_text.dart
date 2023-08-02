@@ -1,4 +1,3 @@
-import 'package:cocktail_project/constants/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -33,7 +32,7 @@ class ConstantText {
     foreground: Paint()
       ..shader = const LinearGradient(
         colors: <Color>[Colors.blue, Colors.purple],
-      ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
+      ).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0)),
   );
   static TextStyle searchText = TextStyle(
     fontSize: 20,
@@ -42,7 +41,7 @@ class ConstantText {
     foreground: Paint()
       ..shader = const LinearGradient(
         colors: <Color>[Colors.blue, Colors.purple, Colors.white, Colors.grey],
-      ).createShader(Rect.fromLTWH(0, 0, 250.0, 70.0)),
+      ).createShader(const Rect.fromLTWH(0, 0, 250.0, 70.0)),
   );
 
   static TextStyle smallGradientText = GoogleFonts.openSans(
@@ -56,7 +55,7 @@ class ConstantText {
           Colors.red,
           Colors.lightBlue
         ],
-      ).createShader(Rect.fromLTWH(10.0, 40.0, 200.0, 70.0)),
+      ).createShader(const Rect.fromLTWH(10.0, 40.0, 200.0, 70.0)),
   );
   static TextStyle bigWhiteText = GoogleFonts.openSans(
       fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white);

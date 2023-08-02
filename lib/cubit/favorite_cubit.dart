@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cocktail_project/data/repositories/auth_repository.dart';
 import 'package:cocktail_project/data/repositories/database_repository.dart';
-import 'package:cocktail_project/model/alcoholic_model.dart';
 import 'package:equatable/equatable.dart';
 
 part 'favorite_state.dart';

@@ -16,7 +16,7 @@ class SearchFoundNone extends SearchState {}
 class SearchFound extends SearchState {
   final List<DrinkInfo> searchList;
 
-  SearchFound({required this.searchList});
+  const SearchFound({required this.searchList});
 }
 
 class SearchFailure extends SearchState {}

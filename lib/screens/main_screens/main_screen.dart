@@ -6,7 +6,6 @@ import 'package:cocktail_project/screens/main_screens/home_screen.dart';
 import 'package:cocktail_project/screens/main_screens/profile_screen.dart';
 import 'package:cocktail_project/screens/main_screens/search_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 @RoutePage()
 class MainScreen extends StatefulWidget {

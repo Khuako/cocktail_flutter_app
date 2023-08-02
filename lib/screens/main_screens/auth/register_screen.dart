@@ -5,7 +5,6 @@ import 'package:cocktail_project/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../constants/constant_text.dart';
-import '../../../widgets/snack_bar.dart';
 
 @RoutePage()
 class RegisterScreen extends StatefulWidget {

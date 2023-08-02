@@ -6,23 +6,19 @@ import 'package:cocktail_project/constants/constant_text.dart';
 import 'package:cocktail_project/cubit/cocktail_detail_cubit.dart';
 import 'package:cocktail_project/cubit/favorite_cubit.dart';
 import 'package:cocktail_project/cubit/favorite_list_cubit.dart';
-import 'package:cocktail_project/data/repositories/auth_repository.dart';
-import 'package:cocktail_project/data/repositories/database_repository.dart';
 import 'package:cocktail_project/model/cocktail_model.dart';
 import 'package:cocktail_project/widgets/snack_bar.dart';
 import 'package:cocktail_project/widgets/tag_card_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart';
 
 @RoutePage()
 class CocktailDetailScreen extends StatefulWidget {
-  String cocktailId;
-  String imageUrl;
-  String title;
-  CocktailDetailScreen(
-      {required this.cocktailId, required this.imageUrl, required this.title});
+  final String cocktailId;
+  final String imageUrl;
+  final String title;
+  const CocktailDetailScreen(
+      {super.key, required this.cocktailId, required this.imageUrl, required this.title});
 
   @override
   State<CocktailDetailScreen> createState() => _CocktailDetailScreenState();
@@ -214,7 +210,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                         child: BlocBuilder<FavoriteCubit, FavoriteState>(
                           builder: (context, state) {
                             return AnimatedSwitcher(
-                              duration: Duration(milliseconds: 250),
+                              duration: const Duration(milliseconds: 250),
                               child: state is FavoriteRed
                                   ? Container(
                                       key: UniqueKey(),

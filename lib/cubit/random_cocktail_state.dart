@@ -13,5 +13,5 @@ class RandomCocktailLoading extends RandomCocktailState {}
 
 class RandomCocktailLoaded extends RandomCocktailState {
   final DrinkInfo drinkInfo;
-  RandomCocktailLoaded({required this.drinkInfo});
+  const RandomCocktailLoaded({required this.drinkInfo});
 }

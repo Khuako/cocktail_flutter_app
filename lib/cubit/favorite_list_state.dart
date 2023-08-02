@@ -14,5 +14,5 @@ class FavoriteListLoading extends FavoriteListState {}
 class FavoriteListLoaded extends FavoriteListState {
   final List<dynamic>? favDrinks;
 
-  FavoriteListLoaded({required this.favDrinks});
+  const FavoriteListLoaded({required this.favDrinks});
 }

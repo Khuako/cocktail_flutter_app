@@ -5,10 +5,10 @@ import 'package:cocktail_project/cubit/alco_list_cubit.dart';
 import 'package:cocktail_project/cubit/non_alco_list_cubit.dart';
 import 'package:cocktail_project/cubit/popular_drinks_cubit.dart';
 import 'package:cocktail_project/cubit/random_cocktail_cubit.dart';
-import 'package:cocktail_project/routes/routes.dart';
+
 import 'package:cocktail_project/widgets/image_and_tite_widget.dart';
 import 'package:cocktail_project/widgets/list_widget.dart';
-import 'package:cocktail_project/widgets/snack_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -105,8 +105,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                         cockImage: state
                                             .alcoDrinks[index].strDrinkThumb!),
                                   );
-                                } 
-                                return Container();
+                                }
+                                return const SizedBox(
+                                  height: 220,
+                                  width: 200,
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           : BlocBuilder<NonAlcoListCubit, NonAlcoListState>(
@@ -115,9 +123,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return Container();
                                 }
                                 if (state is NonAlcoListLoading) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(
-                                      color: ConstantColors.blueColor,
+                                  return const SizedBox(
+                                    height: 220,
+                                    width: 200,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   );
                                 }
@@ -140,10 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             .alcoDrinks[index].strDrinkThumb!),
                                   );
                                 }
-                                if (state is NonAlcoListFailure) {
-                                  showSnackBar(
-                                      context, Colors.red, state.e.toString());
-                                }
                                 return Container();
                               },
                             ),
@@ -164,9 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
               BlocBuilder<RandomCocktailCubit, RandomCocktailState>(
                 builder: (context, state) {
                   if (state is RandomCocktailLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: ConstantColors.blueColor,
+                    return const SizedBox(
+                      width: 250,
+                      height: 250,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.grey,
+                        ),
                       ),
                     );
                   }
@@ -200,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 15,
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 10),
                 width: MediaQuery.of(context).size.width,
                 child: BlocBuilder<PopularDrinksCubit, PopularDrinksState>(
                   builder: (context, state) {

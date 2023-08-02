@@ -1,7 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/constant_text.dart';
 
 class ImageAndTitleWidget extends StatelessWidget {
   String title;
@@ -25,6 +26,7 @@ class ImageAndTitleWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
           ),
           child: ClipRRect(
+            borderRadius: BorderRadius.circular(25),
             child: CachedNetworkImage(
               imageUrl: imageUrl,
               fit: BoxFit.cover,
@@ -36,7 +38,6 @@ class ImageAndTitleWidget extends StatelessWidget {
                 color: Theme.of(context).scaffoldBackgroundColor,
               ),
             ),
-            borderRadius: BorderRadius.circular(25),
           ),
         ),
         const SizedBox(

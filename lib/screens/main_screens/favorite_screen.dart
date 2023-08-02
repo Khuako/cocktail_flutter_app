@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/constants/constant_text.dart';
-import 'package:cocktail_project/cubit/favorite_cubit.dart';
 import 'package:cocktail_project/cubit/favorite_list_cubit.dart';
-import 'package:cocktail_project/routes/routes.dart';
 import 'package:cocktail_project/widgets/list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +42,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       padding: const EdgeInsets.all(25),
                       child: GridView.builder(
                         scrollDirection: Axis.vertical,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(

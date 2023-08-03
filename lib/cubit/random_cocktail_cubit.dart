@@ -9,7 +9,11 @@ class RandomCocktailCubit extends Cubit<RandomCocktailState> {
   RandomCocktailCubit() : super(RandomCocktailInitial());
   Future<void> fetchRandomCocktail() async {
     emit(RandomCocktailLoading());
-    final result = await CocktailApiProvider().fetchRandomCocktail();
-    emit(RandomCocktailLoaded(drinkInfo: result));
+    try {
+      final result = await CocktailApiProvider().fetchRandomCocktail();
+      emit(RandomCocktailLoaded(drinkInfo: result));
+    } on Exception catch (e) {
+      emit(RandomCocktailFailure());
+    }
   }
 }

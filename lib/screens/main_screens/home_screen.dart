@@ -152,6 +152,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                             .alcoDrinks[index].strDrinkThumb!),
                                   );
                                 }
+                                if (state is NonAlcoListFailure) {
+                                  return const SizedBox(
+                                    height: 220,
+                                    width: 200,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  );
+                                }
                                 return Container();
                               },
                             ),
@@ -198,7 +209,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }
-                  return Container();
+                  return const SizedBox(
+                    width: 250,
+                    height: 250,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  );
                 },
               ),
               const SizedBox(
@@ -218,8 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context, state) {
                     if (state is PopularDrinksLoading) {
                       return const Center(
-                        child: CircularProgressIndicator(
-                            color: ConstantColors.blueColor),
+                        child: CircularProgressIndicator(color: Colors.grey),
                       );
                     }
                     if (state is PopularDrinksLoaded) {
@@ -270,6 +288,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                         },
+                      );
+                    }
+                    if (state is PopularDrinksFailure) {
+                      return const Center(
+                        child: CircularProgressIndicator(color: Colors.grey),
                       );
                     }
                     return Container();

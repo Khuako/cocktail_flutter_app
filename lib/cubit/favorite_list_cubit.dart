@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:cocktail_project/data/repositories/database_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -13,10 +15,14 @@ class FavoriteListCubit extends Cubit<FavoriteListState> {
   Future<void> fetchFavoriteList() async {
     emit(FavoriteListLoading());
     try {
-      final result = await databaseReposiory.getUserFavorite();
+      final res = await InternetAddress.lookup('example.com');
+      if (res.isNotEmpty && res[0].rawAddress.isNotEmpty) {
+        print('connected');
+              final result = await databaseReposiory.getUserFavorite();
       emit(FavoriteListLoaded(favDrinks: result));
-    } catch (e) {
-      throw Exception(e.toString());
+      }
+    } on SocketException catch (e) {
+      emit(FavoriteListFailure());
     }
   }
 }

@@ -20,9 +20,20 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: CocktailDetailScreen(
+          key: args.key,
           cocktailId: args.cocktailId,
           imageUrl: args.imageUrl,
           title: args.title,
+        ),
+      );
+    },
+    IngDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<IngDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: IngDetailScreen(
+          key: args.key,
+          ingTitle: args.ingTitle,
         ),
       );
     },
@@ -75,6 +86,7 @@ abstract class _$AppRouter extends RootStackRouter {
 /// [CocktailDetailScreen]
 class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
   CocktailDetailRoute({
+    Key? key,
     required String cocktailId,
     required String imageUrl,
     required String title,
@@ -82,6 +94,7 @@ class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
   }) : super(
           CocktailDetailRoute.name,
           args: CocktailDetailRouteArgs(
+            key: key,
             cocktailId: cocktailId,
             imageUrl: imageUrl,
             title: title,
@@ -97,10 +110,13 @@ class CocktailDetailRoute extends PageRouteInfo<CocktailDetailRouteArgs> {
 
 class CocktailDetailRouteArgs {
   const CocktailDetailRouteArgs({
+    this.key,
     required this.cocktailId,
     required this.imageUrl,
     required this.title,
   });
+
+  final Key? key;
 
   final String cocktailId;
 
@@ -110,7 +126,45 @@ class CocktailDetailRouteArgs {
 
   @override
   String toString() {
-    return 'CocktailDetailRouteArgs{cocktailId: $cocktailId, imageUrl: $imageUrl, title: $title}';
+    return 'CocktailDetailRouteArgs{key: $key, cocktailId: $cocktailId, imageUrl: $imageUrl, title: $title}';
+  }
+}
+
+/// generated route for
+/// [IngDetailScreen]
+class IngDetailRoute extends PageRouteInfo<IngDetailRouteArgs> {
+  IngDetailRoute({
+    Key? key,
+    required String ingTitle,
+    List<PageRouteInfo>? children,
+  }) : super(
+          IngDetailRoute.name,
+          args: IngDetailRouteArgs(
+            key: key,
+            ingTitle: ingTitle,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'IngDetailRoute';
+
+  static const PageInfo<IngDetailRouteArgs> page =
+      PageInfo<IngDetailRouteArgs>(name);
+}
+
+class IngDetailRouteArgs {
+  const IngDetailRouteArgs({
+    this.key,
+    required this.ingTitle,
+  });
+
+  final Key? key;
+
+  final String ingTitle;
+
+  @override
+  String toString() {
+    return 'IngDetailRouteArgs{key: $key, ingTitle: $ingTitle}';
   }
 }
 

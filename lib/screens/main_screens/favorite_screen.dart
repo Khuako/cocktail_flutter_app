@@ -73,6 +73,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 ),
               );
             }
+            if(state is FavoriteListFailure){
+              return Center(child: Text('No connection to the Internet', style: ConstantText.tagText,),);
+            }
             return Container();
           },
         ));

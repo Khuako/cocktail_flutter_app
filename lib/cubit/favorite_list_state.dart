@@ -16,3 +16,4 @@ class FavoriteListLoaded extends FavoriteListState {
 
   const FavoriteListLoaded({required this.favDrinks});
 }
+class FavoriteListFailure extends FavoriteListState {}

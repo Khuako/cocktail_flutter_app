@@ -3,13 +3,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-
 class ImageAndTitleWidget extends StatelessWidget {
   String title;
   String imageUrl;
   TextStyle style;
   ImageAndTitleWidget({
-    super.key,
     required this.imageUrl,
     required this.title,
     required this.style,
@@ -21,7 +19,7 @@ class ImageAndTitleWidget extends StatelessWidget {
       children: [
         Container(
           width: 250,
-          height: 250,
+          height: 200,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
           ),
@@ -46,6 +44,7 @@ class ImageAndTitleWidget extends StatelessWidget {
         Text(
           title,
           style: style,
+          textAlign: TextAlign.center,
         )
       ],
     );

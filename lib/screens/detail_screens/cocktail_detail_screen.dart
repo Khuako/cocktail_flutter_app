@@ -7,6 +7,7 @@ import 'package:cocktail_project/cubit/cocktail_detail_cubit.dart';
 import 'package:cocktail_project/cubit/favorite_cubit.dart';
 import 'package:cocktail_project/cubit/favorite_list_cubit.dart';
 import 'package:cocktail_project/model/cocktail_model.dart';
+import 'package:cocktail_project/routes/routes.dart';
 import 'package:cocktail_project/widgets/snack_bar.dart';
 import 'package:cocktail_project/widgets/tag_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,10 @@ class CocktailDetailScreen extends StatefulWidget {
   final String imageUrl;
   final String title;
   const CocktailDetailScreen(
-      {super.key, required this.cocktailId, required this.imageUrl, required this.title});
+      {super.key,
+      required this.cocktailId,
+      required this.imageUrl,
+      required this.title});
 
   @override
   State<CocktailDetailScreen> createState() => _CocktailDetailScreenState();
@@ -356,34 +360,40 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return SizedBox(
-                                width: 100,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                              '$urlIng${ing[index]}-Medium.png'),
+                              return InkWell(
+                                onTap: () {
+                                  AutoRouter.of(context).push(
+                                      IngDetailRoute(ingTitle: ing[index]));
+                                },
+                                child: SizedBox(
+                                  width: 100,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        width: 100,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                '$urlIng${ing[index]}-Medium.png'),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: index > mes.length - 1
-                                          ? Text(
-                                              ing[index],
-                                              style: ConstantText.ingText,
-                                              textAlign: TextAlign.center,
-                                            )
-                                          : Text(
-                                              '${mes[index]} ${ing[index]}',
-                                              style: ConstantText.ingText,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                    ),
-                                  ],
+                                      Expanded(
+                                        child: index > mes.length - 1
+                                            ? Text(
+                                                ing[index],
+                                                style: ConstantText.ingText,
+                                                textAlign: TextAlign.center,
+                                              )
+                                            : Text(
+                                                '${mes[index]} ${ing[index]}',
+                                                style: ConstantText.ingText,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },

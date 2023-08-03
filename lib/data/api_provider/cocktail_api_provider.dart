@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:cocktail_project/model/alcoholic_model.dart';
 import 'package:http/http.dart';
 
@@ -15,7 +16,21 @@ class CocktailApiProvider {
     final response = isAlco
         ? await client.get(Uri.parse(baseUrl + alcoUrl))
         : await client.get(Uri.parse(baseUrl + nonAlcoUrl));
-    return AlcoholicModel.fromJson(json.decode(response.body)).drinks!;
+    if (response.statusCode == 200) {
+      return AlcoholicModel.fromJson(json.decode(response.body)).drinks!;
+    } else {
+      throw Exception('Error response');
+    }
+  }
+
+  Future<AlcoholicModel> fetchIngridientDrinks(String query) async {
+    final response =
+        await client.get(Uri.parse('${baseUrl}filter.php?i=$query'));
+    if (response.statusCode == 200) {
+      return AlcoholicModel.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Error response');
+    }
   }
 
   Future<DrinkInfo> fetchRandomCocktail() async {
@@ -23,12 +38,20 @@ class CocktailApiProvider {
     if (response.statusCode == 200) {
       return Cocktail.fromJson(json.decode(response.body)).drinks![0];
     } else {
-      return Future.error('Error response');
+      throw Exception('Error response');
     }
   }
 
-  Future<List<Drinks>> fetchPopularDrinks() async {
-    return AlcoholicModel.fromJson(json.decode(jsonPopularDrinks)).drinks!;
+  Future fetchPopularDrinks() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+        return AlcoholicModel.fromJson(json.decode(jsonPopularDrinks)).drinks!;
+      }
+    } on SocketException catch (_) {
+      throw Exception('Error response');
+    }
   }
 
   Future<DrinkInfo> fetchCocktailById(String cocktailId) async {
@@ -37,7 +60,7 @@ class CocktailApiProvider {
     if (response.statusCode == 200) {
       return Cocktail.fromJson(json.decode(response.body)).drinks![0];
     } else {
-      return Future.error('Error response');
+      throw Exception('Error response');
     }
   }
 
@@ -47,7 +70,7 @@ class CocktailApiProvider {
     if (response.statusCode == 200) {
       return Cocktail.fromJson(json.decode(response.body));
     } else {
-      return Future.error('Error response');
+      throw Exception('Error response');
     }
   }
 }

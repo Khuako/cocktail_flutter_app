@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/routes/auth_guard.dart';
+import 'package:cocktail_project/screens/detail_screens/ing_detail_screen.dart';
 import 'package:cocktail_project/screens/main_screens/auth/register_screen.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../screens/detail_screens/cocktail_detail_screen.dart';
 import '../screens/main_screens/auth/login_screen.dart';
@@ -24,5 +26,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: FavoriteRoute.page),
         AutoRoute(page: ProfileRoute.page),
         AutoRoute(page: CocktailDetailRoute.page),
+        AutoRoute(page: IngDetailRoute.page),
       ];
 }

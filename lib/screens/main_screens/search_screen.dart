@@ -101,7 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: state.searchList.length,
-                    itemExtent: 320,
+                    itemExtent: 270,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
@@ -118,6 +118,14 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       );
                     },
+                  );
+                }
+                if (state is SearchFailure) {
+                  return Center(
+                    child: Text(
+                      'No connection to the Internet',
+                      style: ConstantText.titleTextStyle,
+                    ),
                   );
                 }
                 return Container();

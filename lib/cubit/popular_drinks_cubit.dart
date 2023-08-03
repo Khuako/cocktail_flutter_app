@@ -9,7 +9,11 @@ class PopularDrinksCubit extends Cubit<PopularDrinksState> {
   PopularDrinksCubit() : super(PopularDrinksInitial());
   Future<void> fetchPopularDrinks() async {
     emit(PopularDrinksLoading());
-    final result = await CocktailApiProvider().fetchPopularDrinks();
-    emit(PopularDrinksLoaded(popularDrinks: result));
+    try {
+      final result = await CocktailApiProvider().fetchPopularDrinks();
+      emit(PopularDrinksLoaded(popularDrinks: result));
+    } on Exception {
+      emit(PopularDrinksFailure());
+    }
   }
 }

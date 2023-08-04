@@ -41,13 +41,15 @@ class AuthCubit extends Cubit<AuthState> {
       required String password,
       required BuildContext context}) async {
     emit(AuthLoading());
+    print('loading');
     try {
       await authRepository.signIn(email: email, password: password);
-      AutoRouter.of(context)
-          .pushAndPopUntil(const MainRoute(), predicate: (_) => false);
       emit(AuthSignedIn());
       email = email;
+      print('signed in');
+      print(AuthRepository().firebaseAuth.currentUser?.email);
     } catch (e) {
+      print('not signed in');
       emit(AuthSignedOut());
       showSnackBar(context, Colors.red, e.toString());
       FocusManager.instance.primaryFocus?.unfocus();
@@ -55,7 +57,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void getUserEmail() {
-    email =  authRepository.firebaseAuth.currentUser!.email!;
+    email = authRepository.firebaseAuth.currentUser!.email!;
   }
   // bool isLoggedIn() {
   //   final result = authRepository.isLoggedIn();

@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cocktail_project/constants/constant_text.dart';
 import 'package:cocktail_project/cubit/auth_cubit.dart';
+import 'package:cocktail_project/cubit/favorite_list_cubit.dart';
+import 'package:cocktail_project/data/repositories/auth_repository.dart';
 
 import 'package:cocktail_project/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../../data/repositories/database_repository.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
@@ -108,35 +112,42 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: double.infinity,
                   height: 44,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        await context.read<AuthCubit>().signIn(
-                            email: _email.text,
-                            password: _password.text,
-                            context: context);
-                      }
+                  child: BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      return ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            await context.read<AuthCubit>().signIn(
+                                email: _email.text,
+                                password: _password.text,
+                                context: context);
+                            AutoRouter.of(context).pushAndPopUntil(
+                                const MainRoute(),
+                                predicate: (_) => false);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey.shade800),
+                        child: BlocBuilder<AuthCubit, AuthState>(
+                          builder: (context, state) {
+                            if (state is AuthLoading) {
+                              return const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                      color: Colors.grey),
+                                ),
+                              );
+                            }
+                            return Text(
+                              'Login',
+                              style: ConstantText.titleTextStyle,
+                            );
+                          },
+                        ),
+                      );
                     },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey.shade800),
-                    child: BlocBuilder<AuthCubit, AuthState>(
-                      builder: (context, state) {
-                        if (state is AuthLoading) {
-                          return const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                              child:
-                                  CircularProgressIndicator(color: Colors.grey),
-                            ),
-                          );
-                        }
-                        return Text(
-                          'Login',
-                          style: ConstantText.titleTextStyle,
-                        );
-                      },
-                    ),
                   ),
                 ),
                 const SizedBox(

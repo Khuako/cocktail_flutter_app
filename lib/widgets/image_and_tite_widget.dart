@@ -27,7 +27,7 @@ class ImageAndTitleWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
             child: CachedNetworkImage(
               imageUrl: imageUrl,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               maxHeightDiskCache: 400,
               maxWidthDiskCache: 400,
               placeholder: (context, url) => Container(
